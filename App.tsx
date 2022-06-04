@@ -26,7 +26,6 @@ export default function App() {
 
 const Container = styled.SafeAreaView`
   flex: 1;
-  background-color: #fff;
 `
 
 const Wrapper = styled.View`
