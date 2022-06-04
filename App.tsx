@@ -1,20 +1,35 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import styled from "styled-components/native"
+import BottomTabs from './components/BottomTabs';
+import SearchResults from './components/SearchResults';
+import Title from './components/Title';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+    <Container>
+
+      <Wrapper>
+        {/* Title */}
+        <Title />
+        {/* Search Results */}
+        <SearchResults />
+      </Wrapper>
+
+      {/* Bottom Tabs */}
+      <BottomTabs />
+    
       <StatusBar style="auto" />
-    </View>
+    </Container>
+
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const Container = styled.SafeAreaView`
+  flex: 1;
+  background-color: #fff;
+`
+
+const Wrapper = styled.View`
+  padding: 0 25px;
+  flex: 1
+`
