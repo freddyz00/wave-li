@@ -4,6 +4,7 @@ import TextInput from './TextInput'
 import SearchTypes from './SearchTypes'
 import EventCard from './EventCard'
 
+
 const SearchResults = () => {
   return (
     <Container>
@@ -12,9 +13,11 @@ const SearchResults = () => {
         {/* Search Types */}
         <SearchTypes />
         {/* Search Results */}
-        <Wrapper>
 
-        <EventCard />
+        <Wrapper>
+          <EventCard />
+          <EventCard />
+          <EventCard />
         </Wrapper>
     </Container>
   )
@@ -26,6 +29,8 @@ const Container = styled.View`
 `
 
 const Wrapper = styled.ScrollView`
+  margin-top: 5px;
+  padding: 5px 0;
 `
 
 export default SearchResults
