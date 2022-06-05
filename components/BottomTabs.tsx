@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components/native'
 
 import { Ionicons } from '@expo/vector-icons'; 
-import { StyleSheet, TouchableOpacity, TouchableWithoutFeedback,  Text, View } from 'react-native';
+import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 
 const BottomTabs = () => {
   const [selectedTab, setSelectedTab] = useState<string>("Search")

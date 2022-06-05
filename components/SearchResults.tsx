@@ -3,9 +3,13 @@ import React from 'react'
 import TextInput from './TextInput'
 import SearchTypes from './SearchTypes'
 import EventCard from './EventCard'
+import { Event } from '../typings.d'
 
+import { eventsState } from '../atoms/eventsStateAtom'
+import { useRecoilValue } from 'recoil'
 
 const SearchResults = () => {
+  const events = useRecoilValue(eventsState)
   return (
     <Container>
         {/* Search Input */}
@@ -15,9 +19,10 @@ const SearchResults = () => {
         {/* Search Results */}
 
         <Wrapper>
-          <EventCard />
-          <EventCard />
-          <EventCard />
+          {events.map((event: Event) => (
+            <EventCard key={event.id} />
+          ))}
+
         </Wrapper>
     </Container>
   )

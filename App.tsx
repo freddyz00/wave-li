@@ -1,34 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
-import styled from "styled-components/native"
-import BottomTabs from './components/BottomTabs';
-import SearchResults from './components/SearchResults';
-import Title from './components/Title';
+import { RecoilRoot } from 'recoil';
+
+import Search from './screens/Search';
 
 export default function App() {
   return (
-    <Container>
-
-      <Wrapper>
-        {/* Title */}
-        <Title />
-        {/* Search Results */}
-        <SearchResults />
-      </Wrapper>
-
-      {/* Bottom Tabs */}
-      <BottomTabs />
-    
+    <RecoilRoot>
       <StatusBar style="auto" />
-    </Container>
-
+      <Search />
+    </RecoilRoot>
   );
 }
-
-const Container = styled.SafeAreaView`
-  flex: 1;
-`
-
-const Wrapper = styled.View`
-  padding: 0 25px;
-  flex: 1
-`

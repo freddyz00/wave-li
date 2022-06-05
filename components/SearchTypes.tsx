@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components/native'
 
 const SearchTypes = () => {
+  const [activeSearchHeading, setActiveSearchHeading] = useState<string>("Events")
+
   return (
     <Container>
-      <SearchHeading>Events</SearchHeading>
-      <SearchHeading>People</SearchHeading>
-      <SearchHeading>Group</SearchHeading>
+      <SearchHeading active={activeSearchHeading === "Events"}>Events</SearchHeading>
+      <SearchHeading active={activeSearchHeading === "People"}>People</SearchHeading>
+      <SearchHeading active={activeSearchHeading === "Groups"}>Groups</SearchHeading>
     </Container>
   )
 }
@@ -17,10 +19,15 @@ const Container = styled.View`
   margin: 5px 0;
 `
 
-const SearchHeading = styled.Text`
+interface HeadingProps {
+  active?: boolean
+}
+
+const SearchHeading = styled.Text<HeadingProps>`
   font-size: 24px;
   font-weight: bold;
-  text-decoration: underline;
+  color: ${(props) => (props.active ? "black" : "gray")};
+  text-decoration: ${(props) => (props.active ? "underline" : "none")};
 `
 
 export default SearchTypes
