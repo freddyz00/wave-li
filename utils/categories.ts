@@ -1,10 +1,10 @@
 export const categories: {
   [key: string]: string;
 } = {
-  na: "🎲Ungrouped",
-  hot: "🔥Hot Events",
-  soon: "⏳Happening Soon",
-  fy: "❤For You",
+  na: "🎲 Ungrouped",
+  hot: "🔥 Hot Events",
+  soon: "⏳ Happening Soon",
+  fy: "❤ For You",
 };
 
 export const categoriesOrder: {

@@ -1,13 +1,9 @@
 import styled from "styled-components/native";
 import React from "react";
-import TextInput from "./TextInput";
-import SearchTypes from "./SearchTypes";
 import EventCard from "./EventCard";
-import { Event } from "../typings.d";
 
 import { eventsState } from "../atoms/eventsStateAtom";
 import { useRecoilValue } from "recoil";
-import { Text, View } from "react-native";
 
 import { categories } from "../utils/categories";
 
@@ -15,12 +11,7 @@ const SearchResults = () => {
   const events = useRecoilValue(eventsState);
   return (
     <Container>
-      {/* Search Input */}
-      <TextInput />
-      {/* Search Types */}
-      <SearchTypes />
       {/* Search Results */}
-
       {events.length > 0 && (
         <ResultsList
           sections={events}
@@ -43,12 +34,13 @@ const Container = styled.View`
 `;
 
 const ResultsList = styled.SectionList`
-  margin-top: 5px;
+  margin-top: 10px;
+  padding: 0 25px;
 `;
 
 const SectionHeader = styled.View`
   background-color: #fff;
-  padding: 10px 0;
+  padding-bottom: 10px;
 `;
 
 const SectionHeaderText = styled.Text`

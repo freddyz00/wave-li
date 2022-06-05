@@ -1,5 +1,5 @@
-export default function groupBy(array, key) {
-  return array.reduce((result, currentValue) => {
+export default function groupBy(array: any, key: string) {
+  return array.reduce((result: any, currentValue: any) => {
     if (!(currentValue[key] in result)) {
       result[currentValue[key]] = [];
     }

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
-import { Event } from "../typings.d";
+import { Event } from "../typings";
 
 const EventCard = (props: Event) => {
   return (
@@ -11,7 +11,19 @@ const EventCard = (props: Event) => {
       <EventDetails>
         {/* Event time and location */}
         <TextSecondary>
-          {props.start_timestamp} {props.location}
+          {new Date(props.start_timestamp).toLocaleDateString()}
+          {" • "}
+          {new Date(props.start_timestamp).toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
+          {" - "}
+          {new Date(props.end_timestamp).toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
+          {" • "}
+          {props.location}
         </TextSecondary>
         {/* Event title */}
         <EventHeading>{props.title}</EventHeading>
@@ -19,8 +31,18 @@ const EventCard = (props: Event) => {
         {/* Event description */}
         <TextPrimary>{props.description}</TextPrimary>
         {/* People interested and attending */}
-        <TextPrimary>{props.num_attending} are going.</TextPrimary>
-        <TextPrimary>{props.num_interested} are interested.</TextPrimary>
+        {props.num_attending > 0 && (
+          <TextPrimary>
+            {props.attending[0]?.first_name} and {props.num_attending - 1}{" "}
+            others are going.
+          </TextPrimary>
+        )}
+        {props.num_interested > 0 && (
+          <TextPrimary>
+            {props.interested[0]?.first_name} and {props.num_interested - 1}{" "}
+            others are interested.
+          </TextPrimary>
+        )}
 
         {/* Buttons */}
         <ButtonsContainer>
@@ -66,6 +88,8 @@ const TextPrimary = styled.Text`
 const TextSecondary = styled.Text`
   margin-top: 10px;
   color: gray;
+  font-weight: bold;
+  font-size: 12.5px;
 `;
 
 const ButtonsContainer = styled.View`

@@ -7,6 +7,8 @@ import { useSetRecoilState } from "recoil";
 import { eventsState } from "../atoms/eventsStateAtom";
 import groupBy from "../utils/groupBy";
 import { sortByCategories } from "../utils/categories";
+import TextInput from "../components/TextInput";
+import SearchTypes from "../components/SearchTypes";
 
 const Search = () => {
   const setEvents = useSetRecoilState(eventsState);
@@ -23,7 +25,10 @@ const Search = () => {
         for (const category in groupedEventsObj) {
           groupedEvents.push({
             category,
-            data: groupedEventsObj[category],
+            data: groupedEventsObj[category].sort(
+              (a: any, b: any) =>
+                Date.parse(a.start_timestamp) - Date.parse(b.start_timestamp)
+            ),
           });
         }
         setEvents(sortByCategories(groupedEvents));
@@ -40,9 +45,16 @@ const Search = () => {
       <Wrapper>
         {/* Title */}
         <Title />
-        {/* Search Results */}
-        <SearchResults />
+
+        {/* Search Box */}
+        <TextInput />
+
+        {/* Search Types */}
+        <SearchTypes />
       </Wrapper>
+
+      {/* Search Results */}
+      <SearchResults />
 
       {/* Bottom Tabs */}
       <BottomTabs />
@@ -56,7 +68,6 @@ const Container = styled.SafeAreaView`
 
 const Wrapper = styled.View`
   padding: 0 25px;
-  flex: 1;
 `;
 
 export default Search;
