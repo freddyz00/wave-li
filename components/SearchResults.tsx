@@ -1,41 +1,60 @@
-import styled from 'styled-components/native'
-import React from 'react'
-import TextInput from './TextInput'
-import SearchTypes from './SearchTypes'
-import EventCard from './EventCard'
-import { Event } from '../typings.d'
+import styled from "styled-components/native";
+import React from "react";
+import TextInput from "./TextInput";
+import SearchTypes from "./SearchTypes";
+import EventCard from "./EventCard";
+import { Event } from "../typings.d";
 
-import { eventsState } from '../atoms/eventsStateAtom'
-import { useRecoilValue } from 'recoil'
+import { eventsState } from "../atoms/eventsStateAtom";
+import { useRecoilValue } from "recoil";
+import { Text, View } from "react-native";
+
+import { categories } from "../utils/categories";
 
 const SearchResults = () => {
-  const events = useRecoilValue(eventsState)
+  const events = useRecoilValue(eventsState);
   return (
     <Container>
-        {/* Search Input */}
-        <TextInput />
-        {/* Search Types */}
-        <SearchTypes />
-        {/* Search Results */}
+      {/* Search Input */}
+      <TextInput />
+      {/* Search Types */}
+      <SearchTypes />
+      {/* Search Results */}
 
-        <Wrapper>
-          {events.map((event: Event) => (
-            <EventCard key={event.id} />
-          ))}
-
-        </Wrapper>
+      {events.length > 0 && (
+        <ResultsList
+          sections={events}
+          keyExtractor={(item: any) => item.id}
+          renderItem={({ item }: any) => <EventCard {...item} />}
+          renderSectionHeader={({ section: { category } }: any) => (
+            <SectionHeader>
+              <SectionHeaderText>{categories[category]}</SectionHeaderText>
+            </SectionHeader>
+          )}
+        />
+      )}
     </Container>
-  )
-}
+  );
+};
 
 const Container = styled.View`
-    background-color: #fff;
-    flex: 1;
-`
+  background-color: #fff;
+  flex: 1;
+`;
 
-const Wrapper = styled.ScrollView`
+const ResultsList = styled.SectionList`
   margin-top: 5px;
-  padding: 5px 0;
-`
+`;
 
-export default SearchResults
+const SectionHeader = styled.View`
+  background-color: #fff;
+  padding: 10px 0;
+`;
+
+const SectionHeaderText = styled.Text`
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+`;
+
+export default SearchResults;

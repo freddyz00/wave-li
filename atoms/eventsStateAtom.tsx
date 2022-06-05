@@ -1,6 +1,6 @@
-import { atom, } from "recoil";
+import { atom } from "recoil";
 
-export const eventsState  = atom({
-    key: "eventsState",
-    default: []
-})
+export const eventsState = atom({
+  key: "eventsState",
+  default: [],
+});
