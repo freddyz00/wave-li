@@ -32,16 +32,26 @@ const EventCard = (props: Event) => {
         <TextPrimary>{props.description}</TextPrimary>
         {/* People interested and attending */}
         {props.num_attending > 0 && (
-          <TextPrimary>
-            {props.attending[0]?.first_name} and {props.num_attending - 1}{" "}
-            others are going.
-          </TextPrimary>
+          <GoingAndInterested>
+            {props.attending[0]?.picture && (
+              <Avatar source={{ uri: props.attending[0]?.picture }} />
+            )}
+            <TextPrimary>
+              {props.attending[0]?.first_name} and {props.num_attending - 1}{" "}
+              others are going.
+            </TextPrimary>
+          </GoingAndInterested>
         )}
         {props.num_interested > 0 && (
-          <TextPrimary>
-            {props.interested[0]?.first_name} and {props.num_interested - 1}{" "}
-            others are interested.
-          </TextPrimary>
+          <GoingAndInterested>
+            {props.interested[0]?.picture && (
+              <Avatar source={{ uri: props.attending[0]?.picture }} />
+            )}
+            <TextPrimary>
+              {props.interested[0]?.first_name} and {props.num_interested - 1}{" "}
+              others are interested.
+            </TextPrimary>
+          </GoingAndInterested>
         )}
 
         {/* Buttons */}
@@ -81,8 +91,20 @@ const EventHeading = styled.Text`
   margin-top: 5px;
 `;
 
-const TextPrimary = styled.Text`
+const Avatar = styled.Image`
+  width: 25px;
+  height: 25px;
+  border-radius: 25px;
+  margin-right: 10px;
+`;
+
+const GoingAndInterested = styled.View`
+  flex-direction: row;
   margin-top: 5px;
+`;
+
+const TextPrimary = styled.Text`
+  margin: 5px 0;
 `;
 
 const TextSecondary = styled.Text`
