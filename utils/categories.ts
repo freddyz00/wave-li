@@ -15,10 +15,3 @@ export const categoriesOrder: {
   soon: 2,
   na: 100,
 };
-
-export const sortByCategories = (array: any) => {
-  return array.sort(
-    (a: any, b: any) =>
-      categoriesOrder[a.category] - categoriesOrder[b.category]
-  );
-};

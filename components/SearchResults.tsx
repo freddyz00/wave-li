@@ -7,6 +7,7 @@ import { useRecoilValue } from "recoil";
 import { categories } from "../utils/categories";
 import { Text, View } from "react-native";
 import { matchedEventsState } from "../atoms/matchedEventsStateAtom";
+import { COLORS } from "../theme/colors";
 
 const SearchResults = () => {
   const matchedEvents = useRecoilValue(matchedEventsState);
@@ -36,7 +37,6 @@ const SearchResults = () => {
 };
 
 const Container = styled.View`
-  background-color: #fff;
   flex: 1;
 `;
 
@@ -46,7 +46,7 @@ const ResultsList = styled.SectionList`
 `;
 
 const SectionHeader = styled.View`
-  background-color: #fff;
+  background-color: #ffffff;
   padding-bottom: 10px;
 `;
 

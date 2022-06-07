@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
+import { COLORS } from "../theme/colors";
 
 const Title = () => {
   return (
@@ -16,6 +17,7 @@ const Wrapper = styled.View`
 const Heading = styled.Text`
   font-size: 24px;
   font-weight: bold;
+  color: ${COLORS.dark};
 `;
 
 export default Title;

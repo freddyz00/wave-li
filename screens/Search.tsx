@@ -4,16 +4,17 @@ import SearchResults from "../components/SearchResults";
 import Title from "../components/Title";
 import { useEffect } from "react";
 import groupBy from "../utils/groupBy";
-import { sortByCategories } from "../utils/categories";
+import { sortByCategories, sortByDate } from "../utils/sort";
 import TextInput from "../components/TextInput";
 import SearchTypes from "../components/SearchTypes";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { allEventsState } from "../atoms/allEventsStateAtom";
 import { matchedEventsState } from "../atoms/matchedEventsStateAtom";
+import { COLORS } from "../theme/colors";
 
 const Search = () => {
-  const [allEvents, setAllEvents] = useRecoilState(allEventsState);
-  const [matchedEvents, setMatchedEvents] = useRecoilState(matchedEventsState);
+  const setAllEvents = useSetRecoilState(allEventsState);
+  const setMatchedEvents = useSetRecoilState(matchedEventsState);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -23,15 +24,13 @@ const Search = () => {
         );
         const events = await res.json();
         const groupedEventsByKey = groupBy(events, "category");
-        const groupedEvents: any = Object.keys(groupedEventsByKey).map(
-          (category) => ({
+        const groupedEvents: any = sortByCategories(
+          Object.keys(groupedEventsByKey).map((category) => ({
             category,
-            data: groupedEventsByKey[category].sort(
-              (a: any, b: any) =>
-                Date.parse(a.start_timestamp) - Date.parse(b.start_timestamp)
-            ),
-          })
+            data: sortByDate(groupedEventsByKey[category]),
+          }))
         );
+
         setAllEvents(groupedEvents);
         setMatchedEvents(groupedEvents);
       } catch (error) {

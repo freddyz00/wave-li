@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components/native";
 import { Event } from "../typings";
+import { COLORS } from "../theme/colors";
 
 const EventCard = (props: Event) => {
   return (
@@ -70,8 +71,9 @@ const EventCard = (props: Event) => {
 
 const Card = styled.View`
   border-radius: 10px;
-  border: 1px solid lightgray;
   margin-bottom: 15px;
+  background-color: white;
+  border: 1px solid #d1d1d1;
 `;
 
 const EventImage = styled.Image`
@@ -89,6 +91,7 @@ const EventHeading = styled.Text`
   font-size: 18px;
   font-weight: bold;
   margin-top: 5px;
+  color: ${COLORS.dark};
 `;
 
 const Avatar = styled.Image`
@@ -105,6 +108,7 @@ const GoingAndInterested = styled.View`
 
 const TextPrimary = styled.Text`
   margin: 5px 0;
+  color: ${COLORS.text};
 `;
 
 const TextSecondary = styled.Text`
@@ -122,21 +126,25 @@ const ButtonsContainer = styled.View`
 const ButtonPrimary = styled.TouchableOpacity`
   padding: 10px 15px;
   border-radius: 5px;
-  background-color: #333;
-  border: 1px solid #333;
+  background-color: ${COLORS.primary};
+  border: 2px solid ${COLORS.primary};
 `;
 
 const ButtonSecondary = styled.TouchableOpacity`
   padding: 10px 15px;
   border-radius: 5px;
   background-color: #fff;
-  border: 1px solid gray
+  border: 2px solid ${COLORS.primary}
   margin-left: 10px;
 `;
 
 const ButtonTextPrimary = styled.Text`
   color: white;
+  font-weight: bold;
 `;
-const ButtonTextSecondary = styled.Text``;
+const ButtonTextSecondary = styled.Text`
+  color: ${COLORS.primary};
+  font-weight: bold;
+`;
 
 export default EventCard;

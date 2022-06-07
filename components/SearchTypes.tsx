@@ -1,33 +1,41 @@
-import React, { useState } from 'react'
-import styled from 'styled-components/native'
+import React, { useState } from "react";
+import styled from "styled-components/native";
+import { COLORS } from "../theme/colors";
 
 const SearchTypes = () => {
-  const [activeSearchHeading, setActiveSearchHeading] = useState<string>("Events")
+  const [activeSearchHeading, setActiveSearchHeading] =
+    useState<string>("Events");
 
   return (
     <Container>
-      <SearchHeading active={activeSearchHeading === "Events"}>Events</SearchHeading>
-      <SearchHeading active={activeSearchHeading === "People"}>People</SearchHeading>
-      <SearchHeading active={activeSearchHeading === "Groups"}>Groups</SearchHeading>
+      <SearchHeading active={activeSearchHeading === "Events"}>
+        Events
+      </SearchHeading>
+      <SearchHeading active={activeSearchHeading === "People"}>
+        People
+      </SearchHeading>
+      <SearchHeading active={activeSearchHeading === "Groups"}>
+        Groups
+      </SearchHeading>
     </Container>
-  )
-}
+  );
+};
 
 const Container = styled.View`
   flex-direction: row;
   justify-content: space-between;
   margin: 5px 0;
-`
+`;
 
 interface HeadingProps {
-  active?: boolean
+  active?: boolean;
 }
 
 const SearchHeading = styled.Text<HeadingProps>`
   font-size: 24px;
   font-weight: bold;
-  color: ${(props) => (props.active ? "black" : "gray")};
+  color: ${(props) => (props.active ? `${COLORS.dark}` : `${COLORS.text}`)};
   text-decoration: ${(props) => (props.active ? "underline" : "none")};
-`
+`;
 
-export default SearchTypes
+export default SearchTypes;
