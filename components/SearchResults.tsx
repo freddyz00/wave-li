@@ -1,16 +1,31 @@
 import styled from "styled-components/native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import EventCard from "./EventCard";
 
 import { useRecoilValue } from "recoil";
 
 import { categories } from "../utils/categories";
-import { Text, View } from "react-native";
+import { Text, View, ActivityIndicator } from "react-native";
 import { matchedEventsState } from "../atoms/matchedEventsStateAtom";
-import { COLORS } from "../theme/colors";
 
 const SearchResults = () => {
+  const [loading, setLoading] = useState<boolean>(true);
   const matchedEvents = useRecoilValue(matchedEventsState);
+
+  useEffect(() => {
+    if (loading && matchedEvents.length !== 0) {
+      setLoading(false);
+    }
+  }, [matchedEvents]);
+
+  if (loading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+
   return (
     <Container>
       {/* Search Results */}
