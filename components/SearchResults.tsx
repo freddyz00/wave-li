@@ -2,19 +2,20 @@ import styled from "styled-components/native";
 import React from "react";
 import EventCard from "./EventCard";
 
-import { eventsState } from "../atoms/eventsStateAtom";
 import { useRecoilValue } from "recoil";
 
 import { categories } from "../utils/categories";
+import { Text, View } from "react-native";
+import { matchedEventsState } from "../atoms/matchedEventsStateAtom";
 
 const SearchResults = () => {
-  const events = useRecoilValue(eventsState);
+  const matchedEvents = useRecoilValue(matchedEventsState);
   return (
     <Container>
       {/* Search Results */}
-      {events.length > 0 && (
+      {matchedEvents.length > 0 ? (
         <ResultsList
-          sections={events}
+          sections={matchedEvents}
           keyExtractor={(item: any) => item.id}
           renderItem={({ item }: any) => <EventCard {...item} />}
           renderSectionHeader={({ section: { category } }: any) => (
@@ -23,6 +24,12 @@ const SearchResults = () => {
             </SectionHeader>
           )}
         />
+      ) : (
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <Text>No events match your search.</Text>
+        </View>
       )}
     </Container>
   );

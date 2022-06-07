@@ -3,15 +3,17 @@ import BottomTabs from "../components/BottomTabs";
 import SearchResults from "../components/SearchResults";
 import Title from "../components/Title";
 import { useEffect } from "react";
-import { useSetRecoilState } from "recoil";
-import { eventsState } from "../atoms/eventsStateAtom";
 import groupBy from "../utils/groupBy";
 import { sortByCategories } from "../utils/categories";
 import TextInput from "../components/TextInput";
 import SearchTypes from "../components/SearchTypes";
+import { useRecoilState } from "recoil";
+import { allEventsState } from "../atoms/allEventsStateAtom";
+import { matchedEventsState } from "../atoms/matchedEventsStateAtom";
 
 const Search = () => {
-  const setEvents = useSetRecoilState(eventsState);
+  const [allEvents, setAllEvents] = useRecoilState(allEventsState);
+  const [matchedEvents, setMatchedEvents] = useRecoilState(matchedEventsState);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -20,18 +22,18 @@ const Search = () => {
           `https://waveli-coding-challenge.herokuapp.com/events`
         );
         const events = await res.json();
-        const groupedEventsObj = groupBy(events, "category");
-        const groupedEvents: any = [];
-        for (const category in groupedEventsObj) {
-          groupedEvents.push({
+        const groupedEventsByKey = groupBy(events, "category");
+        const groupedEvents: any = Object.keys(groupedEventsByKey).map(
+          (category) => ({
             category,
-            data: groupedEventsObj[category].sort(
+            data: groupedEventsByKey[category].sort(
               (a: any, b: any) =>
                 Date.parse(a.start_timestamp) - Date.parse(b.start_timestamp)
             ),
-          });
-        }
-        setEvents(sortByCategories(groupedEvents));
+          })
+        );
+        setAllEvents(groupedEvents);
+        setMatchedEvents(groupedEvents);
       } catch (error) {
         console.log(error);
       }

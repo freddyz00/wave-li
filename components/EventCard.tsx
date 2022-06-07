@@ -45,7 +45,7 @@ const EventCard = (props: Event) => {
         {props.num_interested > 0 && (
           <GoingAndInterested>
             {props.interested[0]?.picture && (
-              <Avatar source={{ uri: props.attending[0]?.picture }} />
+              <Avatar source={{ uri: props.interested[0]?.picture }} />
             )}
             <TextPrimary>
               {props.interested[0]?.first_name} and {props.num_interested - 1}{" "}
