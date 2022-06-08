@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
+
 import { COLORS } from "../theme/colors";
 
 const Title = () => {

@@ -1,16 +1,18 @@
-import styled from "styled-components/native";
-import BottomTabs from "../components/BottomTabs";
-import SearchResults from "../components/SearchResults";
-import Title from "../components/Title";
 import { useEffect } from "react";
-import groupBy from "../utils/groupBy";
-import { sortByCategories, sortByDate } from "../utils/sort";
+import { useSetRecoilState } from "recoil";
+import styled from "styled-components/native";
+
+import Title from "../components/Title";
 import TextInput from "../components/TextInput";
 import SearchTypes from "../components/SearchTypes";
-import { useSetRecoilState } from "recoil";
+import SearchResults from "../components/SearchResults";
+import BottomTabs from "../components/BottomTabs";
+
+import groupBy from "../utils/groupBy";
+import { sortByCategories, sortByDate } from "../utils/sort";
+
 import { allEventsState } from "../atoms/allEventsStateAtom";
 import { matchedEventsState } from "../atoms/matchedEventsStateAtom";
-import { COLORS } from "../theme/colors";
 
 const Search = () => {
   const setAllEvents = useSetRecoilState(allEventsState);
@@ -23,6 +25,8 @@ const Search = () => {
           `https://waveli-coding-challenge.herokuapp.com/events`
         );
         const events = await res.json();
+
+        // transform data into a format for section list
         const groupedEventsByKey = groupBy(events, "category");
         const groupedEvents: any = sortByCategories(
           Object.keys(groupedEventsByKey).map((category) => ({

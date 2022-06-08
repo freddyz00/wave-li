@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
+
 import { COLORS } from "../theme/colors";
+
+interface HeadingProps {
+  active: boolean;
+}
 
 const SearchTypes = () => {
   const [activeSearchHeading, setActiveSearchHeading] =
@@ -26,10 +31,6 @@ const Container = styled.View`
   justify-content: space-between;
   margin: 5px 0;
 `;
-
-interface HeadingProps {
-  active?: boolean;
-}
 
 const SearchHeading = styled.Text<HeadingProps>`
   font-size: 24px;

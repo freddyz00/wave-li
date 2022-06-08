@@ -1,11 +1,10 @@
 import styled from "styled-components/native";
 import React, { useEffect, useState } from "react";
-import EventCard from "./EventCard";
-
 import { useRecoilValue } from "recoil";
-
-import { categories } from "../utils/categories";
 import { Text, View, ActivityIndicator } from "react-native";
+
+import EventCard from "./EventCard";
+import { categories } from "../utils/categories";
 import { matchedEventsState } from "../atoms/matchedEventsStateAtom";
 
 const SearchResults = () => {
@@ -18,6 +17,7 @@ const SearchResults = () => {
     }
   }, [matchedEvents]);
 
+  // initial loading state
   if (loading) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
